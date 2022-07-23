@@ -16,6 +16,26 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isDoctor: {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    seenNotification: {
+        type: Array,
+        default: []
+    },
+    unseenNotification: {
+        type: Array,
+        default: []
+    },
+    isActive: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 
