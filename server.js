@@ -12,12 +12,14 @@ const PORT = 8080
 
 //routes
 import { user_router } from "./routes/userRoute.js";
+import { doctor_router } from "./routes/doctorRoute.js";
 
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/api/auth', user_router);
+app.use('/api/doctor', doctor_router);
 
 
 app.get('/', (request, response) => {

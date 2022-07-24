@@ -76,9 +76,15 @@ export const getUserInfoById = async (req, res) => {
         message: "User found",
         success: true,
         data: {
+          userId: user._id,
           first_name: user.first_name,
           last_name: user.last_name,
           email: user.email,
+          isDoctor: user.isDoctor,
+          isAdmin: user.isAdmin,
+          isActive: user.isActive,
+          seenNotification: user.seenNotification,
+          unseenNotification: user.unseenNotification,
         },
       });
     }
