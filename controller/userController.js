@@ -2,6 +2,7 @@ import { UserModel } from "../model/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+/******************************************************** */
 // Create a new user
 export const registerUser = async (req, res) => {
 try {
@@ -31,7 +32,10 @@ try {
 }
 
 };
+/******************************************************** */
 
+
+/******************************************************** */
 //login user
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -61,7 +65,10 @@ export const loginUser = async (req, res) => {
     token
   });
 };
+/******************************************************** */
 
+
+/******************************************************** */
 //get user info by id
 export const getUserInfoById = async (req, res) => {
   try {
@@ -76,7 +83,7 @@ export const getUserInfoById = async (req, res) => {
         message: "User found",
         success: true,
         data: {
-          userId: user._id,
+          userId: req.body.userId,
           first_name: user.first_name,
           last_name: user.last_name,
           email: user.email,
@@ -96,4 +103,23 @@ export const getUserInfoById = async (req, res) => {
   }
     
   }
+/******************************************************** */
 
+
+/******************************************************** */
+//get all users
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find({}).select("-password");
+    res.status(200).json({
+      message: "Users found",
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+}
