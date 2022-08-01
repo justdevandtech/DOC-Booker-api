@@ -123,3 +123,64 @@ export const getAllUsers = async (req, res) => {
     });
   }
 }
+
+/******************************************************** */
+//delete user notifications all
+export const deleteUserNotification = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ _id: req.body.userId });
+    if (!user) {
+      return res.status(400).json({
+        message: "User does not exist",
+        success: false,
+      });
+    } else {
+      user.unseenNotification = [];
+      // user.seenNotification = [];
+      await user.save();
+      res.status(200).json({
+        message: "User notification deleted",
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+}
+
+//delete user unseen notifications by id
+export const deleteUserUnseenNotification = async (req, res) => {
+  //get notification id from params
+  const notificationId = req.params.id;
+  try {
+    const user = await UserModel.findOne({ _id: req.body.userId });
+    if (!user) {
+      return res.status(400).json({
+        message: "User does not exist",
+        success: false,
+      });
+    } 
+    //get notification id from user unseen notification
+    const unseenNotification = user.unseenNotification;
+    //find notification id in unseen notification
+    const index = unseenNotification.filter( notification => notification._id == notificationId);
+    //remove notification id from unseen notification
+    unseenNotification.splice(index, 1);
+    //save user unseen notification
+    await user.save();
+      res.status(200).json({
+        message: "User notification deleted",
+        success: true,
+      });
+  }
+  catch (error) {
+    res.status(500).json({
+      message: error.message,
+      success: false,
+      error,
+    });
+  }
+}
