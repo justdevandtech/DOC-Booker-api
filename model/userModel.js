@@ -33,7 +33,11 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    isActive: {
+   isBlocked: {
+        type: Boolean,
+        default: false
+    },
+    hasApplied: {
         type: Boolean,
         default: false
     }
