@@ -1,14 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import "dotenv/config";
+import "dotenv/config.js";
 import { dbConnection } from "./config/db.js";
 
 //mongodb connection
 dbConnection();
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 //routes
 import { user_router } from "./routes/userRoute.js";
