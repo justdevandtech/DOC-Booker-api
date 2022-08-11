@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config.js";
 import { dbConnection } from "./config/db.js";
@@ -21,15 +20,11 @@ app.use(cors());
 app.use("/api/auth", user_router);
 app.use("/api/doctor", doctor_router);
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use("/", express.static("client/build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build/index.html"));
-//   });
-// }
 
 app.get("/", (req, res) => {
-    res.send("Hello World");
+    res.json({
+        message: "Welcome to DOC-Booker API"
+    })
 })
 
 app.listen(PORT, () => console.log("server running on port " + PORT));
