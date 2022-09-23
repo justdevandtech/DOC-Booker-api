@@ -1,6 +1,5 @@
 import { doctorModel } from "../model/doctorModel.js";
 import { UserModel } from "../model/userModel.js";
-import { TwillioClient } from "../hook/twillio.js";
 
 //apply for doctor account
 export const applyAsDoctor = async (req, res) => {
